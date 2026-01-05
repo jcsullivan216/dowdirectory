@@ -161,6 +161,78 @@ class DoWDirectoryParser:
         "Unmanned": ["unmanned", "UAS", "UAV", "drone", "autonomous", "robotics"],
     }
 
+    # Terms that are NOT people names - document headings, form fields, etc.
+    EXCLUDED_TERMS = {
+        # Document/form terms
+        "federal acquisition", "other transaction", "commercial solutions",
+        "small business", "startup paperwork", "award management",
+        "dow directory", "government entity", "unique entity",
+        "military critical", "contract management", "program management",
+        "acquisition strategy", "source selection", "cost analysis",
+        "budget analysis", "financial management", "human resources",
+        "information technology", "data management", "risk management",
+        "quality assurance", "test evaluation", "systems engineering",
+        "logistics support", "maintenance support", "training support",
+        "technical support", "administrative support", "executive summary",
+        "table contents", "list figures", "appendix", "glossary",
+        "acronym list", "reference list", "index",
+        # Generic organizational terms
+        "headquarters", "field office", "regional office",
+        "branch office", "division office", "section office",
+        "support office", "operations center", "command center",
+        "joint office", "combined office", "integrated office",
+        # Process/action terms
+        "request proposal", "request information", "request quote",
+        "statement work", "performance work", "terms conditions",
+        "notice intent", "sources sought", "market research",
+        "industry day", "pre solicitation", "draft solicitation",
+        # Common false positive patterns
+        "page number", "date prepared", "last updated", "version number",
+        "point contact", "phone number", "email address", "mailing address",
+        "office symbol", "organization code", "activity code",
+        "funding source", "appropriation code", "budget line",
+        "fiscal year", "program element", "project number",
+        # Section headers that look like names
+        "chief information", "chief financial", "chief human",
+        "chief technology", "chief data", "chief digital",
+        "chief artificial", "chief innovation", "chief strategy",
+        "portfolio acquisition", "capability program", "program managers",
+        "product managers", "project managers", "deputy program",
+        "assistant program", "associate program",
+        # More generic terms
+        "operational test", "developmental test", "live fire",
+        "independent review", "milestone decision", "acquisition decision",
+        "defense acquisition", "major defense", "acquisition category",
+        "total ownership", "life cycle", "full rate",
+        "initial operational", "full operational", "critical design",
+        "preliminary design", "system requirements", "capability development",
+        "joint capabilities", "analysis alternatives", "technology maturation",
+        "engineering manufacturing", "production deployment", "operations support",
+    }
+
+    # Common first names to help validate real names
+    COMMON_FIRST_NAMES = {
+        "james", "john", "robert", "michael", "william", "david", "richard", "joseph",
+        "thomas", "charles", "christopher", "daniel", "matthew", "anthony", "mark",
+        "donald", "steven", "paul", "andrew", "joshua", "kenneth", "kevin", "brian",
+        "george", "timothy", "ronald", "edward", "jason", "jeffrey", "ryan", "jacob",
+        "gary", "nicholas", "eric", "jonathan", "stephen", "larry", "justin", "scott",
+        "brandon", "benjamin", "samuel", "raymond", "gregory", "frank", "alexander",
+        "patrick", "jack", "dennis", "jerry", "tyler", "aaron", "jose", "adam",
+        "nathan", "henry", "douglas", "zachary", "peter", "kyle", "noah", "ethan",
+        "mary", "patricia", "jennifer", "linda", "elizabeth", "barbara", "susan",
+        "jessica", "sarah", "karen", "lisa", "nancy", "betty", "margaret", "sandra",
+        "ashley", "kimberly", "emily", "donna", "michelle", "dorothy", "carol",
+        "amanda", "melissa", "deborah", "stephanie", "rebecca", "sharon", "laura",
+        "cynthia", "kathleen", "amy", "angela", "shirley", "anna", "brenda", "pamela",
+        "emma", "nicole", "helen", "samantha", "katherine", "christine", "debra",
+        "rachel", "carolyn", "janet", "catherine", "maria", "heather", "diane",
+        "ruth", "julie", "olivia", "joyce", "virginia", "victoria", "kelly", "lauren",
+        "christina", "joan", "evelyn", "judith", "megan", "andrea", "cheryl", "hannah",
+        "jacqueline", "martha", "gloria", "teresa", "ann", "sara", "madison", "frances",
+        "kathryn", "janice", "jean", "abigail", "alice", "judy", "sophia", "grace",
+    }
+
     def __init__(self, output_dir: str = "."):
         self.output_dir = Path(output_dir)
         self.records: List[PersonRecord] = []
@@ -170,6 +242,79 @@ class DoWDirectoryParser:
         self.current_cpe = ""
         self.current_org = ""
         self.hierarchy_stack: List[Tuple[str, str]] = []  # (org_name, org_type)
+
+    def is_valid_name(self, name: str) -> bool:
+        """Check if a string looks like a valid person name."""
+        if not name:
+            return False
+
+        name_lower = name.lower().strip()
+
+        # Check against excluded terms
+        for excluded in self.EXCLUDED_TERMS:
+            if excluded in name_lower or name_lower in excluded:
+                return False
+
+        # Split into parts
+        parts = name.split()
+
+        # Name should have at least 2 parts (first + last)
+        if len(parts) < 2:
+            return False
+
+        # Name shouldn't be too long (likely a phrase, not a name)
+        if len(parts) > 5:
+            return False
+
+        # Check if first word could be a first name
+        first_word = parts[0].lower().rstrip('.')
+
+        # If it has a rank/title prefix, check the next word
+        rank_prefixes = {'mr', 'ms', 'mrs', 'dr', 'hon', 'col', 'lt', 'maj', 'gen', 'adm', 'cpt', 'capt'}
+        if first_word in rank_prefixes and len(parts) > 2:
+            first_word = parts[1].lower()
+
+        # Check if first name is in common names list OR follows name patterns
+        is_likely_name = (
+            first_word in self.COMMON_FIRST_NAMES or
+            (len(first_word) >= 2 and first_word[0].isupper() if name.split()[0][0].isupper() else False)
+        )
+
+        # Additional heuristics
+        # Names typically have proper capitalization (Title Case)
+        words_with_caps = sum(1 for p in parts if p[0].isupper())
+        if words_with_caps < 2:
+            return False
+
+        # Reject if name contains numbers
+        if any(char.isdigit() for char in name):
+            return False
+
+        # Reject if name contains certain keywords
+        reject_keywords = [
+            'office', 'division', 'branch', 'section', 'department',
+            'agency', 'command', 'center', 'support', 'management',
+            'program', 'project', 'system', 'service', 'acquisition',
+            'contract', 'budget', 'finance', 'admin', 'executive',
+            'operational', 'technical', 'information', 'technology',
+            'entity', 'transaction', 'solutions', 'business', 'paperwork',
+            'directory', 'critical', 'government', 'military', 'defense',
+        ]
+        for keyword in reject_keywords:
+            if keyword in name_lower:
+                return False
+
+        # Check that last name is reasonable (not a common non-name word)
+        last_word = parts[-1].lower()
+        non_name_endings = [
+            'office', 'division', 'branch', 'section', 'department',
+            'management', 'support', 'services', 'affairs', 'operations',
+            'systems', 'solutions', 'analysis', 'engineering', 'technology',
+        ]
+        if last_word in non_name_endings:
+            return False
+
+        return True
 
     def extract_text_from_pdf(self, pdf_path: str) -> List[Tuple[int, str]]:
         """Extract text from PDF, returning list of (page_num, text) tuples."""
@@ -504,6 +649,25 @@ class DoWDirectoryParser:
 
             self.parse_pdf(str(pdf_path), page_offset)
 
+    def clean_records(self):
+        """Remove false positive records that aren't actually people."""
+        original_count = len(self.records)
+        cleaned = []
+        removed_examples = []
+
+        for record in self.records:
+            if self.is_valid_name(record.name):
+                cleaned.append(record)
+            elif len(removed_examples) < 20:
+                removed_examples.append(record.name)
+
+        self.records = cleaned
+        removed_count = original_count - len(cleaned)
+        print(f"Cleaned: {original_count} -> {len(self.records)} records ({removed_count} false positives removed)")
+
+        if removed_examples:
+            print(f"  Examples removed: {removed_examples[:10]}")
+
     def deduplicate_records(self):
         """Remove duplicate records."""
         seen = set()
@@ -696,6 +860,9 @@ def main():
         dir_parser.parse_pdf(args.single)
     else:
         dir_parser.parse_chunked_pdfs(args.pattern)
+
+    # Clean false positives
+    dir_parser.clean_records()
 
     # Deduplicate
     dir_parser.deduplicate_records()
