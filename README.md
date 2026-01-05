@@ -1,5 +1,24 @@
 # DoW Directory PDF Scraper
 
+## Quick Start: Run the Frontend App
+
+```bash
+cd dow-directory-app
+npm install
+npm run dev
+```
+
+Then open http://localhost:5173 in your browser.
+
+**Features:**
+- Global search (Cmd+K / Ctrl+K) across 6,400+ personnel records
+- People Directory with filtering by service, position type, status
+- Organization Explorer with tree navigation
+- Analytics Dashboard with charts and data quality metrics
+- CSV export for filtered results
+
+---
+
 ## Overview
 
 This scraper extracts structured data from the 2025 Department of War (DoW) Directory PDF (v35) into a clean, queryable CSV format for business development and market intelligence purposes. The 372-page directory contains the organizational structure, personnel, and contact information for the entire DoW acquisition ecosystem, including Office of the Secretary of Defense (OSD), all military services (Army, Navy, Air Force, Space Force, Marines), Combatant Commands, and supporting agencies.
