@@ -1,0 +1,66 @@
+child_entity,child_type,parent_entity,parent_type,relationship_type
+CPE,CPE,PAE,PAE,Reports_To
+Existing Army Program Executive Offices/Officers (PEOs) are transitioning to become Capability,CPE,Army Portfolio Acquisition Executives (PAEs) are organized as a matrix organization – using,PAE,Reports_To
+Army Program Executive Officers (PEOs) are now Capability Program Executives (CPEs) typically,CPE,The Army Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+SES,CPE,The Army Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+BG,PEO,PAE,PAE,Reports_To
+Andrew T. Clements - Capability Program Executive Ground Fort Belvoir (Currently - Deputy,CPE,PAE,PAE,Reports_To
+PEO,PEO,PAE,PAE,Reports_To
+MG,CPE,PAE,PAE,Reports_To
+SCIE,PM,CPE,CPE,Part_Of
+AW,PM,CPE,CPE,Part_Of
+PEO IEW,PEO,PAE,PAE,Reports_To
+"Mr. Rodney Davis - Capability Program Executive Aviation , Redstone Arsenal (Currently Deputy",CPE,PAE,PAE,Reports_To
+"Rodney Davis  - Capability Program Executive, Aviation, Huntsville, Alabama",CPE,PAE,PAE,Reports_To
+Product Manager - Robotic and Autonomous Systems,PM,"Rodney Davis  - Capability Program Executive, Aviation, Huntsville, Alabama",CPE,Part_Of
+COL,CPE,PAE,PAE,Reports_To
+Ms. Miranda Oden  - Capability Program Executive Guam / Golden Dome  (Currently Deputy,CPE,PAE,PAE,Reports_To
+Capability Program Executive Defensive,CPE,PAE,PAE,Reports_To
+STRI,PEO,PAE,PAE,Reports_To
+Mr. Kyle Perkins - Acting Deputy Program Executive Officer,PEO,PAE,PAE,Reports_To
+"Capability Program Executive Command, Control, Communications & Network",CPE,PAE,PAE,Reports_To
+PM SE,PM,CT,CPE,Part_Of
+PM,PM,CT,CPE,Part_Of
+PM EWSC,PM,BG,CPE,Part_Of
+MEPS,PM,CPE,CPE,Part_Of
+PM FSS,PM,CPE,CPE,Part_Of
+Product Manager -  Bridging,PM,CPE,CPE,Part_Of
+EMSE,PM,CPE,CPE,Part_Of
+Product Manager - Petroleum and Water Systems,PM,CPE,CPE,Part_Of
+PEO JPEO-CBRND,PEO,PAE,PAE,Reports_To
+"Capability Program Executive Joint Chemical, Biological, Radiological and",CPE,PAE,PAE,Reports_To
+CBRND,CPE,PAE,PAE,Reports_To
+George Sfakianoudis - Assistant Program Executive Officer for Business Management,PEO,PAE,PAE,Reports_To
+Today’s Program Executive Offices/Officers (PEOs) will become Capability Program Executives,CPE,PAE,PAE,Reports_To
+PEO,PEO,"by a Portfolio Acquisition Executives (PAEs). For example, the Army will reorganize its 12 existing",PAE,Reports_To
+CPE,CPE,The New Warfighting Acquisition Organization – The Portfolio Acquisition Executive........................ 20,PAE,Reports_To
+Product Manager - Robotic and Autonomous Systems.........................................................103,PM,CPE,CPE,Part_Of
+Capability Program Executive Defensive............................................................................................ 108,CPE,PAE,PAE,Reports_To
+"Capability Program Executive, Golden Dome/Guam Defense............................................................109",CPE,PAE,PAE,Reports_To
+"Capability Program Executive Command, Control, Communications & Network C3N.......................111",CPE,PAE,PAE,Reports_To
+CT,CPE,PAE,PAE,Reports_To
+IEW,CPE,PAE,PAE,Reports_To
+PM EWSC,PM,IEW,CPE,Part_Of
+Product Manager -  Bridging..................................................................................................123,PM,CPE,CPE,Part_Of
+Product Manager - Petroleum and Water Systems............................................................... 123,PM,CPE,CPE,Part_Of
+"Capability Program Executive Joint Chemical, Biological, Radiological and Nuclear Defense",CPE,PAE,PAE,Reports_To
+PEO IWS,PEO,Navy Portfolio Acquisition Executives................................................................................................157,PAE,Reports_To
+Existing Navy Program Executive Offices/Officers (PEOs) are transitioning to become Capability,CPE,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+Program Executives (CPEs) . Capability Program Executives have similar roles and,CPE,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+Navy Program Executive Officers (PEOs) are now Capability Program Executives (CPEs)/,CPE,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+NAVSEA,PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+RDML,PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+"Justin T. Meyer - Executive Director, Program Executive Office,  Aircraft Carriers  (202) 781-2951",PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+RADM,PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+IWS,PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+PEO IWS,PEO,The Navy Will Have 6 Portfolio Acquisition Executives,PAE,Reports_To
+MAGTF,PM,PEO LS,CPE,Part_Of
+Executive Offices (CPEs) /  Program Executive Offices (PEOs) and their subordinate Program,CPE,- Portfolio Acquisition Executives - In theory will integrate Requirements and Acquisition Lanes,PAE,Reports_To
+"past, Acquisition was organized by weapon systems and managed by Program Executive Offices.",PEO,PAE,PAE,Reports_To
+"Program Executive Offices/Officers (PEOs) will become Capability Program Executives (CPEs),",CPE,Portfolio Acquisition Executives (PAEs) are organized as a matrix organization – using people,PAE,Reports_To
+Program Executive Offices into Portfolios. Program Executive Offices/Officers (PEOs) will,PEO,Portfolio Acquisition Executives (PAEs) are organized as a matrix organization – using people,PAE,Reports_To
+"become Capability Program Executives (CPEs), and act as a Portfolios’ acquisition arm.",CPE,Portfolio Acquisition Executives (PAEs) are organized as a matrix organization – using people,PAE,Reports_To
+Offices - headed by Capability Program Executive Officers. Capability Program Executives have,CPE,year will be managed by Portfolio Acquisition Executives and their Capability Program Executive,PAE,Reports_To
+and their Capability Program Executive Officers and ~500 Program/Project Managers. (It also,CPE,This 2025 version of the directory lists the Army and Navy Portfolio Acquisition Executive offices,PAE,Reports_To
+CPE,CPE,This 2025 version of the directory lists the Army and Navy Portfolio Acquisition Executive offices,PAE,Reports_To
+"In the Navy, some Program Executive Offices (PEOs) of major acquisition programs already had",PEO,This 2025 version of the directory lists the Army and Navy Portfolio Acquisition Executive offices,PAE,Reports_To
