@@ -3,6 +3,8 @@
 ## Quick Start: Run the Frontend App
 
 ```bash
+git clone https://github.com/jcsullivan216/dowdirectory
+cd dowdirectory
 cd dow-directory-app
 npm install
 npm run dev
